@@ -1,0 +1,23 @@
+{% extends "employer_bsbase.html" %}
+{% block title %} Jobs-JobPortal {% endblock %}>
+{% block content %}
+<!-- Search Jobs -->
+<br>
+<h3 class="text-sm-left" style="margin-left:40px;"> List of employees </h3><br>
+<br><br>
+{% for app in application_details %}
+<div class="card" style="margin: 5px 20px 5px;">
+  <h5 class="card-header">{{ app[0]+' '+app[1] }}</h5>
+  <div class="card-body">
+    <p class="card-text">Email : {{ app[2] }}</p>
+    <p class="card-text">Job Title : {{ app[3] }}</p>
+    <form action="{{ url_for('employer_accept_reject') }}" method="POST">
+      <input type="hidden" name="job_id" value="{{ app[4] }}">
+      <input type="submit" name="action" value="Accept" class="btn btn-success">
+      <input type="submit" name="action" value="Reject" class="btn btn-danger">
+    </form>
+  </div>
+</div>
+<br>
+{% endfor %}
+{% endblock %}

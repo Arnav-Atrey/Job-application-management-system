@@ -1,0 +1,40 @@
+{% extends "employer_bsbase.html" %}
+{% block title %} Jobs-JobPortal {% endblock %}
+{% block content %}
+<br>
+<h3 class="text-sm-left" style="margin-left:20px;"> Interviews </h3>
+<br>
+{% if schedule %}
+  <table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Sr. No. </th>
+        <th scope="col">Job Title</th>
+        <th scope="col">Date </th>
+        <th scope="col">Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% set count = 1 %}
+        {% for interview in schedule %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ interview[0] }}</td>
+            <td>{{ interview[1] }}</td>
+            <td>{{ interview[2] }}</td>
+        </tr>
+        
+        {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p style="margin-left: 30px; font-size: 20px;">You do not have any interviews scheduled yet.</p>
+  {% endif %}
+  <h1>Execute SQL Query</h1>
+
+  <form action="{{ url_for('execute_query') }}" method="post">
+      <label for="sql_query">Enter SQL Query:</label>
+      <textarea id="sql_query" name="sql_query" rows="4" cols="50"></textarea><br>
+      <input type="submit" value="Execute Query">
+  </form>
+{% endblock %}

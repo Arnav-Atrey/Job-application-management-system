@@ -1,0 +1,56 @@
+{% extends "bsbase.html" %}
+{% block title %} Jobs-JobPortal {% endblock %}
+{% block content %}
+<br>
+<h3 class="text-sm-left" style="margin-left:20px;"> Results </h3><br>
+    {% if res %}
+    {% for result in res %}
+    {% if result[4] == 'Accept' %}
+    
+    <div class="card border-dark mb-3" style = 'margin-left: 20px; margin-right: 80px;'>
+      <div class="card-body">
+
+        <div class="media">
+          <img class="mr-3" src="https://cdn5.vectorstock.com/i/1000x1000/05/09/trophy-icon-on-gray-background-flat-style-trophy-vector-23720509.jpg" height=100 width=100 alt="Generic placeholder image">
+          <div class="media-body">
+            <h5 class="mt-0">Congratulations!</h5>
+            You have been selected for the position of {{ result[1] }} at {{ result[2] }}, {{ result[3] }}!
+          </div>
+        </div>
+
+      </div>
+    </div>
+    
+    {% elif result[4] == 'Pending' %}
+    
+    <div class="card border-dark mb-3" style="margin-left: 20px; margin-right: 80px;">
+      <div class="card-body">
+        <div class="media">
+          <img class="mr-3" src="https://en.pimg.jp/054/819/036/1/54819036.jpg" height=100 width=100 alt="Pending placeholder image">
+          <div class="media-body">
+            <h5 class="mt-0">Pending</h5>
+            Your application for the position of {{ result[1] }} at {{ result[2] }}, {{ result[3] }} is still pending. We will notify you once a decision is made.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% else %}
+    <div class="card border-dark mb-3" style = 'margin-left: 20px; margin-right: 80px;'>
+      <div class="card-body">
+
+        <div class="media">
+          <img class="mr-3" src="https://realliferealtalkgetverbal.files.wordpress.com/2016/03/confused-emoticon_318-47996.jpg?w=396&h=396" height=100 width=100 alt="Generic placeholder image">
+          <div class="media-body">
+            <h5 class="mt-0">Better luck next time!</h5>
+            You have not been selected for the position of {{ result[1] }} at {{ result[2] }}, {{ result[3] }}
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% else %}
+    <p style="margin-left: 20px; font-size: 20px;">No Results found</p>
+    {% endif %}
+{% endblock %}
